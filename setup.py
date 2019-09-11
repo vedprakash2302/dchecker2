@@ -28,7 +28,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'dchecker = dchecker2.dchecker2:main',
+            'dchecker2 = dchecker2.dchecker2:main',
         ],
     },
     install_requires=[
