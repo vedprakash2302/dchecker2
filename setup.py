@@ -11,7 +11,7 @@ execfile('dchecker/version.py')
 
 setup(
     name='dchecker',
-    author='Nicholas Rejack',
+    author='Vedprakash Pandey',
     author_email="v.pandey@ufl.edu",
     maintainer="UF CTS-IT",
     maintainer_email="ctsit@ctsi.ufl.edu",
