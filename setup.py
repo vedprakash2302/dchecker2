@@ -7,10 +7,10 @@ Quick install:
 """
 from setuptools import setup, find_packages
 
-execfile('dchecker/version.py')
+exec(open('dchecker2/version.py').read())
 
 setup(
-    name='dchecker',
+    name='dchecker2',
     author='Vedprakash Pandey',
     author_email="v.pandey@ufl.edu",
     maintainer="UF CTS-IT",
@@ -33,6 +33,7 @@ setup(
     },
     install_requires=[
         "tempita",
-        "Click"
+        "Click",
+        "autopep8"
     ],
 )
