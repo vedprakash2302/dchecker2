@@ -17,7 +17,6 @@ class EmailHandler:
         to_address -- email address the report is going to.
         """
 
-        print(to_address)
         msg = MIMEText(body)
         msg['Subject'] = subject + "\n"
         msg['From'] = from_address
