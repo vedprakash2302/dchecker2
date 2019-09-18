@@ -1,0 +1,8 @@
+# Find VCard Email attributes without the actual email value.
+SELECT (?email_attr AS ?Email_attribute_without_email)
+WHERE {
+ ?v_card <http://www.w3.org/2006/vcard/ns#hasEmail> ?email_attr .  
+ FILTER NOT EXISTS {
+  ?email_attr <http://www.w3.org/2006/vcard/ns#email> ?email .
+ }
+}

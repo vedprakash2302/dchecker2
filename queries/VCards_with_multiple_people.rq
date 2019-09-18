@@ -1,0 +1,11 @@
+# VCards should only be associated with one profile. This can be an
+# indicator that the profiles need to be merged.
+SELECT (COUNT(*) as ?VCards_with_multiple_people)
+WHERE {
+  SELECT ?card (COUNT(?person) as ?numPeople)
+  WHERE {
+    ?card <http://purl.obolibrary.org/obo/ARG_2000029> ?person .
+  }
+  GROUP BY ?card
+  HAVING (?numPeople > 1)
+}

@@ -1,0 +1,16 @@
+# Find all the UF people in VIVO who have a display name, but do  not have a last name
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX ufVivo: <http://vivo.ufl.edu/ontology/vivo-ufl/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT (?uri as ?UF_people_with_display_name_but_no_last_name) WHERE 
+{
+  ?uri a ufVivo:UFEntity .
+  ?uri a foaf:Person .
+  ?contactInfo obo:ARG_2000029 ?uri .
+  ?contactInfo vcard:hasName ?name .
+  FILTER NOT EXISTS {?name vcard:familyName ?last_name .}
+  ?uri rdfs:label ?display_name .
+}

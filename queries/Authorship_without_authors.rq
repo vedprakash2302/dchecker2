@@ -1,0 +1,9 @@
+# Finds the number of authorships without authors.
+SELECT  (count(?authorship) AS ?Authorship_without_authors)
+WHERE
+  { ?authorship <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> <http://vivoweb.org/ontology/core#Authorship>
+    FILTER NOT EXISTS {
+      ?authorship <http://vivoweb.org/ontology/core#relates> ?author .
+      ?author a <http://xmlns.com/foaf/0.1/Person>
+    }
+  }

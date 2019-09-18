@@ -1,0 +1,7 @@
+# query to check if an individual has triples for both a person and an article
+
+SELECT (?s AS ?Persons_merged_with_Articles)
+WHERE {
+	?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+  	?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Document> .
+}

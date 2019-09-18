@@ -1,0 +1,38 @@
+# VCard Attributes that are empty
+SELECT (COUNT(DISTINCT ?attr) AS ?Empty_VCard_Attributes)
+WHERE {
+  {
+    ?v_card <http://www.w3.org/2006/vcard/ns#hasEmail> ?attr .
+    ?attr <http://www.w3.org/2006/vcard/ns#email> ""^^<http://www.w3.org/2001/XMLSchema#string> .
+  }
+  UNION
+  {
+    ?v_card <http://www.w3.org/2006/vcard/ns#hasTelephone> ?attr .
+    ?attr <http://www.w3.org/2006/vcard/ns#telephone> ""^^<http://www.w3.org/2001/XMLSchema#string> .
+  }
+  UNION
+  {
+    ?v_card <http://www.w3.org/2006/vcard/ns#hasName> ?attr .
+    ?attr <http://www.w3.org/2006/vcard/ns#givenName> ""^^<http://www.w3.org/2001/XMLSchema#string> .
+  }
+  UNION
+  {
+    ?v_card <http://www.w3.org/2006/vcard/ns#hasName> ?attr .
+    ?attr <http://www.w3.org/2006/vcard/ns#middleName> ""^^<http://www.w3.org/2001/XMLSchema#string> .
+  }
+  UNION
+  {
+    ?v_card <http://www.w3.org/2006/vcard/ns#hasName> ?attr .
+    ?attr <http://www.w3.org/2006/vcard/ns#familyName> ""^^<http://www.w3.org/2001/XMLSchema#string> .
+  }
+  UNION
+  {
+    ?v_card <http://www.w3.org/2006/vcard/ns#hasURL> ?attr .
+    ?attr <http://www.w3.org/2006/vcard/ns#url> ""^^<http://www.w3.org/2001/XMLSchema#string> .
+  }
+  UNION
+  {
+    ?v_card <http://www.w3.org/2006/vcard/ns#hasURL> ?attr .
+    ?attr <http://vivoweb.org/ontology/core#linkAnchorText> ""^^<http://www.w3.org/2001/XMLSchema#string> .
+  }
+}

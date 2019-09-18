@@ -1,0 +1,17 @@
+# Count of individuals that are of a blank type.
+#
+# Blank nodes act as variables or placeholders. For example, Bob has never met
+# his biological father. Conceptually the triple for this relationship might
+# look like this:
+#   <bobs_uri> :Father _:b0
+#
+# For our purposes, there is no benefit to say a thing has a type, but we
+# haven't specified it. These blank nodes should be removed.
+#
+# See https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#QSynBlankNodes
+
+SELECT  (count(distinct ?s) AS ?Individuals_of_blank_type)
+WHERE
+  { ?s a ?type
+    FILTER isBlank(?type)
+  }

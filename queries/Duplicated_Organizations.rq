@@ -1,0 +1,16 @@
+# Gets the number of organizations that have the same label as another.
+
+PREFIX foaf:     <http://xmlns.com/foaf/0.1/>
+PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT (SUM(?count) as ?Duplicated_Organizations)
+WHERE {
+    SELECT (COUNT(?name) as ?count)
+    WHERE {
+      ?org a foaf:Organization .
+      ?org rdfs:label ?name .
+    }
+    GROUP BY ?name
+    HAVING(?count > 1)
+}

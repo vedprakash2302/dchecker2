@@ -1,0 +1,11 @@
+# query to find DateTimes that are not attached to a DateTimeInterval
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vivo:     <http://vivoweb.org/ontology/core#>
+
+SELECT (COUNT (?dt) AS ?Orphan_datetime)
+WHERE {
+    ?dt a vivo:DateTimeValue .
+  FILTER NOT EXISTS { ?anything vivo:dateTimeValue ?dt . }
+  FILTER NOT EXISTS { ?anything vivo:start ?dt . }
+  FILTER NOT EXISTS { ?anything vivo:end ?dt . }
+}

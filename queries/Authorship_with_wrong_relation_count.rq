@@ -1,0 +1,11 @@
+# Finds the number of authorships with unexpected number of relations
+SELECT  (count(?relations) AS ?Authorship_with_wrong_relation_count)
+WHERE
+  { SELECT  (count(?authorship) AS ?relations)
+    WHERE
+      { ?authorship <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> <http://vivoweb.org/ontology/core#Authorship> .
+        ?authorship <http://vivoweb.org/ontology/core#relates> ?relative
+      }
+    GROUP BY ?authorship
+    HAVING ( ?relations != 2 )
+  }

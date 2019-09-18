@@ -1,0 +1,8 @@
+# Query to find Emails with HTML tags in the label
+# I doubt someone has a valid email with the brackets but this could happen
+# see https://stackoverflow.com/questions/2049502/what-characters-are-allowed-in-an-email-address
+SELECT (?email_attr as ?Emails_with_HTML_tags)
+WHERE {
+  ?email_attr <http://www.w3.org/2006/vcard/ns#email> ?email .
+  filter (regex(str(?email), ">") || regex(str(?email), "<"))
+}

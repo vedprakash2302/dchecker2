@@ -1,0 +1,14 @@
+# query to verify there are no duplicated ufids (on separate URIs)
+PREFIX ufVivo: <http://vivo.ufl.edu/ontology/vivo-ufl/>
+SELECT ?Duplicated_UFIDs ?URI WHERE
+{
+?URI ufVivo:ufid ?Duplicated_UFIDs .
+{
+select (COUNT(?x) as ?c_x) (?ufid as ?Duplicated_UFIDs) where
+{
+?x ufVivo:ufid ?ufid .
+}
+GROUP BY ?ufid
+HAVING (?c_x > 1)
+}
+}

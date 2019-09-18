@@ -1,0 +1,8 @@
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  ufVivo: <http://vivo.ufl.edu/ontology/vivo-ufl/>
+
+SELECT  (concat("<", str(?uri), "> ", ?gatorlink) AS ?GatorLink_on_nonperson)
+WHERE
+  { ?uri ufVivo:gatorlink ?gatorlink
+    FILTER NOT EXISTS {?uri a foaf:Person }
+  }

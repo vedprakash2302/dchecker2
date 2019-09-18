@@ -1,0 +1,9 @@
+# Count of the number of emails that are duplicated.
+SELECT (SUM(?e_c) AS ?Duplicated_Emails) WHERE
+{
+    SELECT (COUNT(?email) AS ?e_c) WHERE
+    {
+        ?email_attr <http://www.w3.org/2006/vcard/ns#email> ?email .
+    } GROUP BY ?email
+    HAVING (COUNT(?email) > 1)
+}

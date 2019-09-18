@@ -1,0 +1,6 @@
+# Query to find Gatorlinks with HTML close tags in the label
+SELECT (?s AS ?Gatorlinks_with_HTML_tags)
+WHERE {
+?s <http://vivo.ufl.edu/ontology/vivo-ufl/gatorlink> ?o .
+filter(regex(str(?o), "/>") || regex(str(?o), "</"))
+}

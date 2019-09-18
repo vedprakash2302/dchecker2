@@ -1,0 +1,39 @@
+# VCards have different attributes associated to them like names.
+# These should be associated with VCards or deleted if the VCard is deleted.
+SELECT (COUNT(?attr) AS ?VCard_attributes_without_VCards)
+WHERE {
+  {
+    ?attr a <http://www.w3.org/2006/vcard/ns#Email> .
+    FILTER NOT EXISTS {
+        ?v_card <http://www.w3.org/2006/vcard/ns#hasEmail> ?attr .
+    }
+  }
+  UNION
+  {
+    ?attr a <http://www.w3.org/2006/vcard/ns#Telephone> .
+    FILTER NOT EXISTS {
+        ?v_card <http://www.w3.org/2006/vcard/ns#hasTelephone> ?attr .
+    }
+  }
+  UNION
+  {
+    ?attr a <http://www.w3.org/2006/vcard/ns#URL> .
+    FILTER NOT EXISTS {
+        ?v_card <http://www.w3.org/2006/vcard/ns#hasURL> ?attr .
+    }
+  }
+  UNION
+  {
+    ?attr a <http://www.w3.org/2006/vcard/ns#Address> .
+    FILTER NOT EXISTS {
+        ?v_card <http://www.w3.org/2006/vcard/ns#hasAddress> ?attr .
+    }
+  }
+  UNION
+  {
+    ?attr a <http://www.w3.org/2006/vcard/ns#Name> .
+    FILTER NOT EXISTS {
+        ?v_card <http://www.w3.org/2006/vcard/ns#hasName> ?attr .
+    }
+  }
+}

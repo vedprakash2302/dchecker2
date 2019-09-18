@@ -1,0 +1,9 @@
+# Find the number of number of people without names.
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT (COUNT(?person) as ?Person_without_name)
+WHERE
+  { ?person a foaf:Person
+  FILTER NOT EXISTS { ?person rdfs:label ?name  }
+  }

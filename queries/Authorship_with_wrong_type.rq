@@ -1,0 +1,7 @@
+# Finds the number of authorships with type
+# <http://vivoweb.org/ontology/vivo#Authorship> instead of the correct
+# <http://vivoweb.org/ontology/core#Authorship>
+SELECT (count(DISTINCT ?s) as ?Authorship_with_wrong_type)
+WHERE
+  { ?s ?o <http://vivoweb.org/ontology/vivo#Authorship> .
+  }

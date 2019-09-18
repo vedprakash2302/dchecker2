@@ -1,0 +1,15 @@
+# Count of the number of journals that have the same E-ISSN.
+PREFIX  bibo: <http://purl.org/ontology/bibo/>
+PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT  (sum(?cnt) AS ?Duplicated_EISSN)
+WHERE
+  { SELECT  ?eissn (count(?eissn) AS ?cnt)
+    WHERE
+      { ?journal bibo:eissn ?raw_eissn
+        BIND(xsd:string(?raw_eissn) AS ?eissn)
+      }
+    GROUP BY ?eissn
+    HAVING ( ?cnt > 1 )
+    ORDER BY DESC(?cnt)
+  }

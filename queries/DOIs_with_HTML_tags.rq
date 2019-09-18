@@ -1,0 +1,8 @@
+# Query to find DOIs with HTML close tags in the label
+# Have to check for the close tag because there are valid DOIs
+# with brackets e.g. 10.1002/(SICI)1097-4687(199611)230:2<129::AID-JMOR2>3.0.CO;2-C
+SELECT (?s AS ?DOIs_with_HTML_tags)
+WHERE {
+?s <http://purl.org/ontology/bibo/doi> ?o .
+filter(regex(str(?o), "/>") || regex(str(?o), "</"))
+}

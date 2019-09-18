@@ -1,0 +1,14 @@
+# query to report on positions missing links to people or organizations
+PREFIX ufVivo: <http://vivo.ufl.edu/ontology/vivo-ufl/>
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+
+SELECT (?x as ?Missing_organization_for_position)
+WHERE
+{
+?x a vivo:Position .
+FILTER NOT EXISTS {?x vivo:relates ?org .
+					?org a foaf:Organization .}
+
+}

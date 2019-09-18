@@ -1,0 +1,11 @@
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vivo:     <http://vivoweb.org/ontology/core#>
+# query to find DateTimeIntervals that are not attached to other entities
+
+SELECT (count(?dti) as ?Orphan_datetimeinterval)
+WHERE {
+  ?dti a vivo:DateTimeInterval .
+  FILTER NOT EXISTS {
+    ?anything vivo:dateTimeInterval ?dti .
+  }
+}

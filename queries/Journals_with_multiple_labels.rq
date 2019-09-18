@@ -1,0 +1,15 @@
+# query to find journals with more than 1 label
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+SELECT (?uri as ?Journals_with_multiple_labels)
+WHERE {
+{
+SELECT ?uri (COUNT (?xlabel) AS ?countlabel)
+WHERE {
+?uri a bibo:Journal .
+?uri rdfs:label ?xlabel .
+}
+GROUP BY ?uri
+}
+FILTER (?countlabel >1)
+}

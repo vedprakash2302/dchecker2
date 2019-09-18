@@ -1,0 +1,12 @@
+# Finds articles with too many labels.
+# Currently, "too many" is 3 or more.
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  bibo: <http://purl.org/ontology/bibo/>
+
+SELECT  (?uri AS ?Articles_with_too_many_labels)
+WHERE
+  { ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> bibo:AcademicArticle .
+    ?uri rdfs:label ?xlabel
+  }
+GROUP BY ?uri
+HAVING ( count(?xlabel) > 2 )

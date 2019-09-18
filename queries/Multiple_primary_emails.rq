@@ -1,0 +1,12 @@
+# Selects a count of how many people have more than one primary email. After the 364 are taken care of this should
+# start returning the actual URIs instead of a count (just remove the outer query).
+SELECT (COUNT(DISTINCT ?person) AS ?Multiple_primary_emails)
+WHERE {
+    SELECT ?person (COUNT(?person) AS ?p_c)
+    WHERE {
+        ?emailattr <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType>  <http://www.w3.org/2006/vcard/ns#Work> .
+        ?v_card <http://www.w3.org/2006/vcard/ns#hasEmail> ?emailattr .
+        ?v_card <http://purl.obolibrary.org/obo/ARG_2000029> ?person .
+    } GROUP BY ?person
+    HAVING (?p_c > 1)
+}

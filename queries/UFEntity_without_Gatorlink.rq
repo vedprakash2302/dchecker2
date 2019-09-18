@@ -1,0 +1,10 @@
+# Finds people who are UFEntities but do not have a gatorlink.
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  ufVivo: <http://vivo.ufl.edu/ontology/vivo-ufl/>
+
+SELECT (COUNT (?uri) as ?UFEntity_without_Gatorlink)
+WHERE { 
+    ?uri a foaf:Person .
+    ?uri a ufVivo:UFEntity .
+    FILTER NOT EXISTS { ?uri ufVivo:gatorlink ?gatorLink }
+}

@@ -1,0 +1,9 @@
+# Count of the number of articles with a duplicate pubmed ID.
+SELECT (SUM(?p_c) AS ?Duplicated_PMIDs){
+SELECT (count(?pmid) AS ?p_c)
+WHERE {
+	?s <http://purl.org/ontology/bibo/pmid> ?pmid .
+} GROUP BY ?pmid
+HAVING (?p_c > 1)
+ORDER BY DESC(?p_c)
+}

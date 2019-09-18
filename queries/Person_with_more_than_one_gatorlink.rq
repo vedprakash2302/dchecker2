@@ -1,0 +1,14 @@
+# query to find people with more than 1 gatorlink
+
+SELECT (?uri as ?Person_with_more_than_one_gatorlink)
+WHERE {
+{
+SELECT ?uri (COUNT (?xlabel) AS ?countlabel)
+WHERE {
+?uri a <http://xmlns.com/foaf/0.1/Person> .
+?uri <http://vivo.ufl.edu/ontology/vivo-ufl/gatorlink> ?xlabel .
+}
+GROUP BY ?uri
+}
+FILTER (?countlabel >1)
+}

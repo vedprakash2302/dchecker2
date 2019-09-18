@@ -1,0 +1,18 @@
+# query to find UF organizations with >1 label  
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX ufVivo: <http://vivo.ufl.edu/ontology/vivo-ufl/>
+
+SELECT (?countlabel as ?UF_organizations_with_multiple_labels)
+WHERE {
+{
+SELECT (COUNT (?xlabel) AS ?countlabel)
+WHERE {
+?uri a foaf:Organization .
+?uri a ufVivo:UFEntity .
+?uri rdfs:label ?xlabel .
+}
+GROUP BY ?uri
+}
+FILTER (?countlabel >1)
+}

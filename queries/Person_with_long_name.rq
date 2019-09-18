@@ -1,0 +1,12 @@
+# Finds people with long names.
+# Currently, "long" is set to more than 1000 characters.
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+
+SELECT ?Person_with_long_name
+WHERE {
+  ?Person_with_long_name a foaf:Person .
+  ?Person_with_long_name rdfs:label ?name .
+  FILTER (strlen(?name) > 1000)
+}
+ORDER BY DESC(strlen(?name))

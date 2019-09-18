@@ -1,0 +1,12 @@
+PREFIX bibo:     <http://purl.org/ontology/bibo/>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+# query to find ISSNs or EISSNs that do not match the expected format
+
+SELECT (concat("<", str(?s), "> ", ?issn) AS ?Malformed_issn)
+WHERE {
+  ?s a bibo:Journal .
+  ?s bibo:issn ?issn .
+  FILTER NOT EXISTS {
+    FILTER regex(?issn, "^[0-9]{4}-[0-9]{3}[0-9xX]$")
+  }
+}

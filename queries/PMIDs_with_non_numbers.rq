@@ -1,0 +1,6 @@
+# Query to check if a pubmed-id has non-number characters in it.
+SELECT (?s AS ?PMIDs_with_non_numbers)
+WHERE {
+?s <http://purl.org/ontology/bibo/pmid> ?o .
+filter(!regex(str(?o), "^[0-9]+$"))
+}

@@ -1,0 +1,15 @@
+PREFIX ufVivo: <http://vivo.ufl.edu/ontology/vivo-ufl/>
+# query to verify there are no duplicated gatorlinks (on separate URIs)
+
+SELECT ?Duplicated_Gatorlinks ?URI WHERE
+{
+?URI ufVivo:gatorlink ?Duplicated_Gatorlinks .
+{
+select (COUNT(?x) as ?c_x) (?gatorlink as ?Duplicated_Gatorlinks) where
+{
+?x ufVivo:gatorlink ?gatorlink .
+}
+GROUP BY ?gatorlink
+HAVING (?c_x > 1)
+}
+}

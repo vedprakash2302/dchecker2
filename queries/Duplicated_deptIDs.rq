@@ -1,0 +1,12 @@
+PREFIX ufVivo: <http://vivo.ufl.edu/ontology/vivo-ufl/>
+SELECT (?c_x as ?Duplicated_deptIDs) WHERE
+{
+{
+select (COUNT(?x) as ?c_x) ?DeptID where
+{
+?x ufVivo:deptID ?DeptID .
+}
+GROUP BY ?DeptID
+}
+FILTER (?c_x > 1)
+}

@@ -1,0 +1,17 @@
+# VCards for individuals should be associated with a person.
+SELECT (COUNT(?v_card) AS ?VCard_without_people)
+WHERE {
+    {
+        ?v_card a <http://www.w3.org/2006/vcard/ns#Individual> .
+        FILTER NOT EXISTS {
+            ?v_card <http://purl.obolibrary.org/obo/ARG_2000029> ?s .
+        }
+    }
+    UNION
+    {
+        ?v_card a <http://www.w3.org/2006/vcard/ns#Individual> .
+        FILTER NOT EXISTS {
+            ?s <http://purl.obolibrary.org/obo/ARG_2000028> ?v_card .
+        }
+    }  
+}

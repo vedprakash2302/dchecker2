@@ -1,0 +1,10 @@
+# Query to get count of journals with no label
+# There are currently too many to list all in the email but
+# could be modified in the future when they are all fixed.
+SELECT (count(?s) AS ?Journals_with_no_label)
+WHERE {
+?s <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> <http://purl.org/ontology/bibo/Journal> .
+filter not exists {
+?s <http://www.w3.org/2000/01/rdf-schema#label> ?any .
+}
+}
