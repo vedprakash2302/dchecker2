@@ -15,9 +15,7 @@ def main(config_file):
     """Dchecker2 is a tool to perform data integrity checks on VIVO's Researcher Database."""
 
     # setup logging
-    logging.basicConfig(filename='dchecker.log',
-                        level=logging.INFO,
-                        format='%(asctime)s %(message)s')
+    logging.basicConfig(filename='dchecker.log', level=logging.INFO, format='%(asctime)s %(message)s')
 
     config = ReadConfig(config_file)
     email = EmailHandler()
@@ -25,6 +23,9 @@ def main(config_file):
 
     echo("Starting dchecker2", "green")
     logging.info("starting dchecker.py")
-
     data_report = query_handler.query_iterator(config.sparql_endpoint, config.query_directory)
-    # email.send(config.from_address, config.to_address, config.subject, data_report)
+
+    logging.info("sending report")
+    email.send(config.from_address, config.to_address, config.subject, data_report)
+
+    logging.info("ending dchecker.py.")
